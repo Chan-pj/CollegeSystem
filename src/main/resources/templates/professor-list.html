@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>교수 목록</title>
+    <style>
+        body { font-family: sans-serif; }
+        h2 { text-align: center; }
+        .wrap { width: 90%; margin: 0 auto; overflow-x: auto; }
+        table { border-collapse: collapse; width: 100%; margin: 20px 0 40px; }
+        th, td { border: 1px solid #ccc; padding: 8px 10px; text-align: center; font-size: 14px; }
+        th { background-color: #f2f2f2; }
+        .top-bar { width: 90%; margin: 20px auto; text-align: right; }
+        .top-bar a { text-decoration: none; padding: 8px 16px; border-radius: 4px; margin-left: 6px; font-size: 14px; }
+        .btn-main { background: #e0e0e0; color: #333; }
+        .btn-add { background: #333; color: white; }
+        .empty { text-align: center; margin-top: 50px; color: #888; }
+    </style>
+</head>
+<body>
+    <h2>교수 목록</h2>
+
+    <div class="top-bar">
+        <a class="btn-main" th:href="@{/}">메인으로</a>
+        <a class="btn-add" th:href="@{/professors/new}">+ 교수 등록</a>
+    </div>
+
+    <div class="wrap" th:if="${!professors.isEmpty()}">
+        <table>
+            <tr><th>교수코드</th><th>이름</th><th>이메일</th><th>전화번호</th><th>등록일자</th></tr>
+            <tr th:each="prof : ${professors}">
+                <td th:text="${prof.csPiCode}"></td>
+                <td th:text="${prof.csPiName}"></td>
+                <td th:text="${prof.csPiEmail}"></td>
+                <td th:text="${prof.csPiPhoneNum}"></td>
+                <td th:text="${prof.csPiRdate}"></td>
+            </tr>
+        </table>
+    </div>
+
+    <p class="empty" th:if="${professors.isEmpty()}">등록된 교수가 없습니다.</p>
+</body>
+</html>

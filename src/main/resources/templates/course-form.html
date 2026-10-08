@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>수강 신청</title>
+    <style>
+        body { font-family: sans-serif; }
+        h2 { text-align: center; }
+        form { width: 420px; margin: 30px auto; display: flex; flex-direction: column; gap: 6px; }
+        label { font-weight: bold; margin-top: 8px; }
+        input, select { padding: 7px; font-size: 14px; }
+        .notice { text-align: center; color: #888; font-size: 13px; }
+        .error { text-align: center; color: #c0392b; font-size: 14px; }
+        button { margin-top: 16px; padding: 10px; background: #333; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .links { text-align: center; }
+    </style>
+</head>
+<body>
+    <h2>수강 신청</h2>
+    <p class="notice">일련번호는 등록 시 자동으로 부여됩니다.</p>
+    <p class="error" th:if="${error}" th:text="${error}"></p>
+
+    <form th:action="@{/courses}" th:object="${course}" method="post">
+        <label>학생</label>
+        <select name="siCode" required>
+            <option value="">-- 학생 선택 --</option>
+            <option th:each="st : ${students}"
+                    th:value="${st.csSiCode}"
+                    th:text="${st.csSiCode} + ' - ' + ${st.csSiName}"></option>
+        </select>
+
+        <label>과목</label>
+        <select name="sjCode" required>
+            <option value="">-- 과목 선택 --</option>
+            <option th:each="sj : ${subjects}"
+                    th:value="${sj.csSjCode}"
+                    th:text="${sj.csSjCode} + ' - ' + ${sj.csSjName} + ' (' + ${sj.csSjUnit} + '학점)'"></option>
+        </select>
+
+        <label>신청일자</label>
+        <input type="date" th:field="*{csCiRdate}" required>
+
+        <button type="submit">신청</button>
+    </form>
+
+    <div class="links"><a th:href="@{/courses}">수강 목록 보기</a> | <a th:href="@{/}">메인으로</a></div>
+</body>
+</html>

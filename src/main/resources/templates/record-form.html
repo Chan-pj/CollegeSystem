@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>성적 입력</title>
+    <style>
+        body { font-family: sans-serif; }
+        h2 { text-align: center; }
+        form { width: 440px; margin: 20px auto; display: flex; flex-direction: column; gap: 6px; }
+        label { font-weight: bold; margin-top: 8px; }
+        input, select { padding: 7px; font-size: 14px; }
+        .hint { font-weight: normal; color: #888; font-size: 12px; }
+        .notice { text-align: center; color: #888; font-size: 13px; }
+        .error { text-align: center; color: #c0392b; font-size: 14px; }
+        button { margin-top: 16px; padding: 10px; background: #333; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .links { text-align: center; }
+    </style>
+</head>
+<body>
+    <h2>성적 입력</h2>
+    <p class="notice">성적 일련번호와 입력 일자는 자동으로 저장됩니다.</p>
+    <p class="error" th:if="${error}" th:text="${error}"></p>
+
+    <form th:action="@{/records}" method="post">
+        <label>수강 건 <span class="hint">(학생 - 과목)</span></label>
+        <select name="ciCode" required>
+            <option value="">-- 수강 건 선택 --</option>
+            <option th:each="c : ${courses}"
+                    th:value="${c.csCiCode}"
+                    th:text="${c.student.csSiCode} + ' ' + ${c.student.csSiName} + ' - ' + ${c.subject.csSjName}"></option>
+        </select>
+
+        <label>성적 <span class="hint">(0~100점)</span></label>
+        <input type="number" name="grade" min="0" max="100" required>
+
+        <button type="submit">등록</button>
+    </form>
+
+    <div class="links"><a th:href="@{/records}">성적 목록 보기</a> | <a th:href="@{/}">메인으로</a></div>
+</body>
+</html>

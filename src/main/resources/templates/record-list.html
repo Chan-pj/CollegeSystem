@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>성적 목록</title>
+    <style>
+        body { font-family: sans-serif; }
+        h2 { text-align: center; }
+        .wrap { width: 90%; margin: 0 auto; overflow-x: auto; }
+        table { border-collapse: collapse; width: 100%; margin: 20px 0 40px; }
+        th, td { border: 1px solid #ccc; padding: 8px 10px; text-align: center; font-size: 14px; }
+        th { background-color: #f2f2f2; }
+        .top-bar { width: 90%; margin: 20px auto; text-align: right; }
+        .top-bar a { text-decoration: none; padding: 8px 16px; border-radius: 4px; margin-left: 6px; font-size: 14px; }
+        .btn-main { background: #e0e0e0; color: #333; }
+        .btn-add { background: #333; color: white; }
+        .empty { text-align: center; margin-top: 50px; color: #888; }
+    </style>
+</head>
+<body>
+    <h2>성적 목록</h2>
+
+    <div class="top-bar">
+        <a class="btn-main" th:href="@{/}">메인으로</a>
+        <a class="btn-add" th:href="@{/records/new}">+ 성적 입력</a>
+    </div>
+
+    <div class="wrap" th:if="${!records.isEmpty()}">
+        <table>
+            <tr>
+                <th>성적 일련번호</th><th>수강 일련번호</th><th>학번</th><th>학생명</th>
+                <th>과목명</th><th>점수</th><th>등급</th><th>입력일자</th>
+            </tr>
+            <tr th:each="r : ${records}">
+                <td th:text="${r.csRiCode}"></td>
+                <td th:text="${r.course != null ? r.course.csCiCode : '-'}"></td>
+                <td th:text="${r.course != null ? r.course.student.csSiCode : '-'}"></td>
+                <td th:text="${r.course != null ? r.course.student.csSiName : '-'}"></td>
+                <td th:text="${r.course != null ? r.course.subject.csSjName : '-'}"></td>
+                <td th:text="${r.csRiGrade}"></td>
+                <td th:text="${r.csRiGrade >= 90 ? 'A' : (r.csRiGrade >= 80 ? 'B' : (r.csRiGrade >= 70 ? 'C' : (r.csRiGrade >= 60 ? 'D' : 'F')))}"></td>
+                <td th:text="${r.csRiRdate}"></td>
+            </tr>
+        </table>
+    </div>
+
+    <p class="empty" th:if="${records.isEmpty()}">입력된 성적이 없습니다.</p>
+</body>
+</html>

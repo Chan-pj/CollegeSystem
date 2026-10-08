@@ -1,0 +1,11 @@
+spring.datasource.url=jdbc:sqlserver://localhost:1433;databaseName=College_System;encrypt=false
+spring.datasource.username=chan
+spring.datasource.password=본인_DB_비밀번호
+spring.datasource.driver-class-name=com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+spring.jpa.hibernate.ddl-auto=none
+spring.jpa.show-sql=true
+spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+logging.level.com.zaxxer.hikari=DEBUG
+logging.level.com.microsoft.sqlserver.jdbc=DEBUG

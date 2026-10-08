@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>교수 정보 입력</title>
+    <style>
+        body { font-family: sans-serif; }
+        h2 { text-align: center; }
+        form { width: 420px; margin: 30px auto; display: flex; flex-direction: column; gap: 6px; }
+        label { font-weight: bold; margin-top: 8px; }
+        input, select { padding: 7px; font-size: 14px; }
+        .hint { font-weight: normal; color: #888; font-size: 12px; }
+        .notice { text-align: center; color: #888; font-size: 13px; }
+        button { margin-top: 16px; padding: 10px; background: #333; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .links { text-align: center; }
+    </style>
+</head>
+<body>
+    <h2>교수 정보 입력</h2>
+    <p class="notice">교수코드는 등록 시 자동으로 부여됩니다.</p>
+
+    <form th:action="@{/professors/new}" th:object="${professor}" method="post">
+        <label>이름</label>
+        <input type="text" th:field="*{csPiName}" maxlength="40" required>
+
+        <label>이메일</label>
+        <input type="email" th:field="*{csPiEmail}" maxlength="40" required>
+
+        <label>전화번호 <span class="hint">(예: 041-539-9400)</span></label>
+        <input type="text" th:field="*{csPiPhoneNum}" maxlength="20" required>
+
+        <label>등록일자</label>
+        <input type="date" th:field="*{csPiRdate}" required>
+
+        <button type="submit">등록</button>
+    </form>
+
+    <div class="links"><a th:href="@{/professors}">교수 목록 보기</a> | <a th:href="@{/}">메인으로</a></div>
+</body>
+</html>

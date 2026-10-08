@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>College System - 메인</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 700px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #333;
+        }
+        .section {
+            background: white;
+            border-radius: 10px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+        .section h2 {
+            margin-top: 0;
+            font-size: 18px;
+            color: #444;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .btn-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+        }
+        .btn {
+            flex: 1;
+            text-align: center;
+            text-decoration: none;
+            padding: 12px 0;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .btn-add {
+            background-color: #333;
+            color: white;
+        }
+        .btn-add:hover {
+            background-color: #555;
+        }
+        .btn-list {
+            background-color: #e0e0e0;
+            color: #333;
+        }
+        .btn-list:hover {
+            background-color: #cfcfcf;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>학사 관리 시스템</h1>
+
+        <div class="section">
+            <h2>학생 정보</h2>
+            <div class="btn-row">
+                <a class="btn btn-add" th:href="@{/students/new}">+ 학생 등록</a>
+                <a class="btn btn-list" th:href="@{/students}">학생 목록</a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>학과 정보</h2>
+            <div class="btn-row">
+                <a class="btn btn-add" th:href="@{/departments/new}">+ 학과 등록</a>
+                <a class="btn btn-list" th:href="@{/departments}">학과 목록</a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>교수 정보</h2>
+            <div class="btn-row">
+                <a class="btn btn-add" th:href="@{/professors/new}">+ 교수 등록</a>
+                <a class="btn btn-list" th:href="@{/professors}">교수 목록</a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>교수 소속 학과</h2>
+            <div class="btn-row">
+                <a class="btn btn-add" th:href="@{/profdepts/new}">+ 소속 등록</a>
+                <a class="btn btn-list" th:href="@{/profdepts}">소속 목록</a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>학생 소속 학과</h2>
+            <div class="btn-row">
+                <a class="btn btn-add" th:href="@{/studentdepts/new}">+ 소속 등록</a>
+                <a class="btn btn-list" th:href="@{/studentdepts}">소속 목록</a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>과목 정보</h2>
+            <div class="btn-row">
+                <a class="btn btn-add" th:href="@{/subjects/new}">+ 과목 등록</a>
+                <a class="btn btn-list" th:href="@{/subjects}">과목 목록</a>
+            </div>
+        </div>
+        <div class="section">
+            <h2>수강 정보</h2>
+            <div class="btn-row">
+                <a class="btn btn-add" th:href="@{/courses/new}">+ 수강 신청</a>
+                <a class="btn btn-list" th:href="@{/courses}">수강 목록</a>
+            </div>
+        </div>
+        <div class="section">
+            <h2>성적 정보</h2>
+            <div class="btn-row">
+                <a class="btn btn-add" th:href="@{/records/new}">+ 성적 입력</a>
+                <a class="btn btn-list" th:href="@{/records}">성적 목록</a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>시간표</h2>
+            <div class="btn-row">
+                <a class="btn btn-add" th:href="@{/timetables/new}">+ 강의 시간 등록</a>
+                <a class="btn btn-list" th:href="@{/timetables}">강의 시간 목록</a>
+                <a class="btn btn-list" th:href="@{/timetables/student}">학생별 시간표</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

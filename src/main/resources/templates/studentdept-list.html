@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>학생 소속 학과 목록</title>
+    <style>
+        body { font-family: sans-serif; }
+        h2 { text-align: center; }
+        table { border-collapse: collapse; width: 85%; margin: 30px auto; }
+        th, td { border: 1px solid #ccc; padding: 8px 10px; text-align: center; font-size: 14px; }
+        th { background-color: #f2f2f2; }
+        .top-bar { width: 85%; margin: 20px auto; text-align: right; }
+        .top-bar a { text-decoration: none; background: #333; color: white; padding: 8px 16px; border-radius: 4px; margin-left: 6px; }
+        .empty { text-align: center; margin-top: 50px; color: #888; }
+    </style>
+</head>
+<body>
+    <h2>학생 소속 학과 목록</h2>
+
+    <div class="top-bar">
+        <a th:href="@{/}">메인으로</a>
+        <a th:href="@{/studentdepts/new}">+ 소속 등록</a>
+    </div>
+
+    <table th:if="${!studentDepts.isEmpty()}">
+        <tr>
+            <th>일련번호</th>
+            <th>학생코드</th>
+            <th>학생명</th>
+            <th>학과코드</th>
+            <th>학과명</th>
+            <th>입력일자</th>
+        </tr>
+        <tr th:each="sd : ${studentDepts}">
+            <td th:text="${sd.csSdCode}"></td>
+            <td th:text="${sd.student != null ? sd.student.csSiCode : '-'}"></td>
+            <td th:text="${sd.student != null ? sd.student.csSiName : '-'}"></td>
+            <td th:text="${sd.department != null ? sd.department.csDiCode : '-'}"></td>
+            <td th:text="${sd.department != null ? sd.department.csDiDeptName : '-'}"></td>
+            <td th:text="${sd.csSdRdate}"></td>
+        </tr>
+    </table>
+
+    <p class="empty" th:if="${studentDepts.isEmpty()}">등록된 정보가 없습니다.</p>
+</body>
+</html>

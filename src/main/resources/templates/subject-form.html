@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>과목 등록</title>
+    <style>
+        body { font-family: sans-serif; }
+        h2 { text-align: center; }
+        form { width: 420px; margin: 30px auto; display: flex; flex-direction: column; gap: 6px; }
+        label { font-weight: bold; margin-top: 8px; }
+        input, select { padding: 7px; font-size: 14px; }
+        .hint { font-weight: normal; color: #888; font-size: 12px; }
+        button { margin-top: 16px; padding: 10px; background: #333; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .links { text-align: center; }
+    </style>
+</head>
+<body>
+    <h2>과목 등록</h2>
+    <p style="text-align:center; color:#888; font-size:13px;">과목코드는 등록 시 자동으로 부여됩니다.</p>
+
+    <form th:action="@{/subjects}" th:object="${subject}" method="post">
+        <label>과목명 <span class="hint">(최대 20자)</span></label>
+        <input type="text" th:field="*{csSjName}" maxlength="20" required>
+
+        <label>담당교수</label>
+        <select name="piCode" required>
+            <option value="">-- 교수 선택 --</option>
+            <option th:each="prof : ${professors}"
+                    th:value="${prof.csPiCode}"
+                    th:text="${prof.csPiCode} + ' - ' + ${prof.csPiName}"></option>
+        </select>
+
+        <label>개설학과</label>
+        <select name="diCode" required>
+            <option value="">-- 학과 선택 --</option>
+            <option th:each="dept : ${departments}"
+                    th:value="${dept.csDiCode}"
+                    th:text="${dept.csDiCode} + ' - ' + ${dept.csDiDeptName}"></option>
+        </select>
+
+        <label>개설일자</label>
+        <input type="date" th:field="*{csSjRdate}" required>
+
+        <label>이수학점 <span class="hint">(예: 3.0)</span></label>
+        <input type="number" th:field="*{csSjUnit}" step="0.5" min="0" max="99.9" required>
+
+        <label>전공여부</label>
+        <select th:field="*{csSjMajor}">
+            <option value="1">전공필수</option>
+            <option value="2">전공선택</option>
+            <option value="3">비전공필수</option>
+            <option value="4">비전공선택</option>
+        </select>
+
+        <label>강의실 <span class="hint">(최대 30자)</span></label>
+        <input type="text" th:field="*{csSjRoom}" maxlength="30" required>
+
+        <label>정원</label>
+        <input type="number" th:field="*{csSjCount}" min="0" required>
+
+        <label>개설 학기 <span class="hint">(예: 2026-2학기)</span></label>
+        <input type="text" th:field="*{csSjTerm}" maxlength="20" required>
+
+        <button type="submit">등록</button>
+    </form>
+
+    <div class="links"><a th:href="@{/subjects}">과목 목록 보기</a> | <a th:href="@{/}">메인으로</a></div>
+</body>
+</html>

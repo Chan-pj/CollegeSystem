@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>학과 목록</title>
+    <style>
+        body { font-family: sans-serif; }
+        h2 { text-align: center; }
+        .wrap { width: 90%; margin: 0 auto; overflow-x: auto; }
+        table { border-collapse: collapse; width: 100%; margin: 20px 0 40px; }
+        th, td { border: 1px solid #ccc; padding: 8px 10px; text-align: center; font-size: 14px; }
+        th { background-color: #f2f2f2; }
+        .top-bar { width: 90%; margin: 20px auto; text-align: right; }
+        .top-bar a { text-decoration: none; padding: 8px 16px; border-radius: 4px; margin-left: 6px; font-size: 14px; }
+        .btn-main { background: #e0e0e0; color: #333; }
+        .btn-add { background: #333; color: white; }
+        .empty { text-align: center; margin-top: 50px; color: #888; }
+    </style>
+</head>
+<body>
+    <h2>학과 목록</h2>
+
+    <div class="top-bar">
+        <a class="btn-main" th:href="@{/}">메인으로</a>
+        <a class="btn-add" th:href="@{/departments/new}">+ 학과 등록</a>
+    </div>
+
+    <div class="wrap" th:if="${!departments.isEmpty()}">
+        <table>
+            <tr><th>학과코드</th><th>학과이름</th><th>개설일</th></tr>
+            <tr th:each="dept : ${departments}">
+                <td th:text="${dept.csDiCode}"></td>
+                <td th:text="${dept.csDiDeptName}"></td>
+                <td th:text="${dept.csDiRdate}"></td>
+            </tr>
+        </table>
+    </div>
+
+    <p class="empty" th:if="${departments.isEmpty()}">등록된 학과가 없습니다.</p>
+</body>
+</html>

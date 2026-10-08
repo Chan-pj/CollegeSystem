@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>학생 목록</title>
+    <style>
+        body { font-family: sans-serif; }
+        h2 { text-align: center; }
+        .wrap { width: 90%; margin: 0 auto; overflow-x: auto; }
+        table { border-collapse: collapse; width: 100%; margin: 20px 0 40px; }
+        th, td { border: 1px solid #ccc; padding: 8px 10px; text-align: center; font-size: 14px; }
+        th { background-color: #f2f2f2; }
+        .top-bar { width: 90%; margin: 20px auto; text-align: right; }
+        .top-bar a { text-decoration: none; padding: 8px 16px; border-radius: 4px; margin-left: 6px; font-size: 14px; }
+        .btn-main { background: #e0e0e0; color: #333; }
+        .btn-add { background: #333; color: white; }
+        .empty { text-align: center; margin-top: 50px; color: #888; }
+    </style>
+</head>
+<body>
+    <h2>학생 목록</h2>
+
+    <div class="top-bar">
+        <a class="btn-main" th:href="@{/}">메인으로</a>
+        <a class="btn-add" th:href="@{/students/new}">+ 학생 등록</a>
+    </div>
+
+    <div class="wrap" th:if="${!students.isEmpty()}">
+        <table>
+            <tr>
+                <th>학번</th><th>이름</th><th>입학연도</th><th>생년월일</th><th>주소</th>
+                <th>학년</th><th>성별</th><th>전화번호</th><th>이메일</th><th>졸업여부</th>
+            </tr>
+            <tr th:each="student : ${students}">
+                <td th:text="${student.csSiCode}"></td>
+                <td th:text="${student.csSiName}"></td>
+                <td th:text="${student.csSiEntryYear}"></td>
+                <td th:text="${student.csSiBirth}"></td>
+                <td th:text="${student.csSiAddr}"></td>
+                <td th:text="${student.csSiGrade != null ? student.csSiGrade + '학년' : '-'}"></td>
+                <td th:text="${student.csSiGender == 'M' ? '남' : (student.csSiGender == 'F' ? '여' : student.csSiGender)}"></td>
+                <td th:text="${student.csSiPhoneNum}"></td>
+                <td th:text="${student.csSiEmail}"></td>
+                <td th:text="${student.csSiStatus == 'Y' ? '졸업' : (student.csSiStatus == 'N' ? '재학' : student.csSiStatus)}"></td>
+            </tr>
+        </table>
+    </div>
+
+    <p class="empty" th:if="${students.isEmpty()}">등록된 학생이 없습니다.</p>
+</body>
+</html>

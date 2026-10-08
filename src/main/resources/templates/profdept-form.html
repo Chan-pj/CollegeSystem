@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>교수 소속 학과 등록</title>
+    <style>
+        body { font-family: sans-serif; }
+        h2 { text-align: center; }
+        form { width: 420px; margin: 30px auto; display: flex; flex-direction: column; gap: 6px; }
+        label { font-weight: bold; margin-top: 8px; }
+        input, select { padding: 7px; font-size: 14px; }
+        button { margin-top: 16px; padding: 10px; background: #333; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .links { text-align: center; }
+    </style>
+</head>
+<body>
+    <h2>교수 소속 학과 등록</h2>
+    <p style="text-align:center; color:#888; font-size:13px;">일련번호는 등록 시 자동으로 부여됩니다.</p>
+
+    <form th:action="@{/profdepts}" th:object="${profDept}" method="post">
+        <label>교수</label>
+        <select name="piCode" required>
+            <option value="">-- 교수 선택 --</option>
+            <option th:each="prof : ${professors}"
+                    th:value="${prof.csPiCode}"
+                    th:text="${prof.csPiCode} + ' - ' + ${prof.csPiName}"></option>
+        </select>
+
+        <label>학과</label>
+        <select name="diCode" required>
+            <option value="">-- 학과 선택 --</option>
+            <option th:each="dept : ${departments}"
+                    th:value="${dept.csDiCode}"
+                    th:text="${dept.csDiCode} + ' - ' + ${dept.csDiDeptName}"></option>
+        </select>
+
+        <label>입력일자</label>
+        <input type="date" th:field="*{csPdRdate}" required>
+
+        <label>학과장 유무</label>
+        <select th:field="*{csPdTask}">
+            <option value="N">N (아님)</option>
+            <option value="Y">Y (학과장)</option>
+        </select>
+
+        <button type="submit">등록</button>
+    </form>
+
+    <div class="links"><a th:href="@{/profdepts}">목록 보기</a> | <a th:href="@{/}">메인으로</a></div>
+</body>
+</html>
